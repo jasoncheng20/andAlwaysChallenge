@@ -1,10 +1,23 @@
-import React from 'react';
+import React from "react";
 import Hero from "../components/Hero";
 
 export default function Home() {
-    return (
-        <div className="container flex items-center mx-auto justify-center">
-            <Hero src="/images/hero-example.png" />
-        </div>
-    )
+  
+  async function getStaticProps(context) {
+    const res = await fetch(`http://localhost:3000/api/cms`);
+    const data = await res.json();
+
+    return {
+      props: {}, // will be passed to the page component as props
+    };
+  }
+
+  return (
+    <div
+      className="p-5 flex items-center justify-center bg-cover bg-local bg-no-repeat bg-bottom"
+      style={{ backgroundImage: "url(/images/hero-background.png)" }}
+    >
+      <Hero src="/images/hero.png" />
+    </div>
+  );
 }
